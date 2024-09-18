@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Vault</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #fff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search-bar input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #fff;
+            background-color: #000;
+            color: #fff;
+            font-size: 1.2em;
+        }
+
+        .word-display {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .word-display h2 {
+            margin: 0;
+        }
+
+        .word-display p {
+            font-size: 1.2em;
+        }
+
+        .profile {
+            margin-top: 30px;
+        }
+
+        .profile h2 {
+            border-bottom: 1px solid #fff;
+            padding-bottom: 10px;
+        }
+
+        .profile-item {
+            border-bottom: 1px solid #fff;
+            padding: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid #fff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Vocabulary Vault</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Enter a word..." />
+            <button onclick="searchWord()">Search</button>
+        </div>
+
+        <div class="word-display" id="wordDisplay">
+            <!-- Word details will be displayed here -->
+        </div>
+
+        <div class="profile">
+            <h2>Your Vocabulary</h2>
+            <div id="profileWords">
+                <!-- Profile words will be displayed here -->
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Vocabulary Vault</p>
+    </footer>
+
+    <script>
+        const wordDisplay = document.getElementById('wordDisplay');
+        const profileWords = document.getElementById('profileWords');
+        let wordProfile = [];
+
+        function searchWord() {
+            const word = document.getElementById('searchInput').value.trim();
+            if (!word) return;
+
+            // Fetch word details (Simulating an API call)
+            const meaning = "Meaning of " + word;  // You can replace this with an API
+            const sentence = "This is an example sentence using the word " + word + ".";
+
+            // Display the word details
+            wordDisplay.innerHTML = `
+                <h2>${word}</h2>
+                <p><strong>Meaning:</strong> ${meaning}</p>
+                <p><strong>Example:</strong> ${sentence}</p>
+            `;
+
+            // Store in profile
+            wordProfile.push({ word, meaning, sentence });
+            updateProfile();
+        }
+
+        function updateProfile() {
+            profileWords.innerHTML = '';
+            wordProfile.forEach((item) => {
+                const wordDiv = document.createElement('div');
+                wordDiv.classList.add('profile-item');
+                wordDiv.innerHTML = `
+                    <h3>${item.word}</h3>
+                    <p><strong>Meaning:</strong> ${item.meaning}</p>
+                    <p><strong>Example:</strong> ${item.sentence}</p>
+                `;
+                profileWords.appendChild(wordDiv);
+            });
+        }
+    </script>
+
+</body>
+</html>
